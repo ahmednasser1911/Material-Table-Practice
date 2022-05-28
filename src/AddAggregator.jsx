@@ -175,14 +175,25 @@ function Row(props) {
           <input type="checkbox" /> {row.name}
         </TableCell>
         <TableCell className="tableCellTxt col-2" align="right">
-          {row.omola}
+          {row.isAlone && (
+            <Select
+              isSearchable={false}
+              options={[
+                { value: "نسبة", label: "نسبة" },
+                { value: "قيمة", label: "قيمة" },
+              ]}
+              placeholder="اختر عمولة"
+            />
+          )}
         </TableCell>
+
         <TableCell className="tableCellTxt col-2" align="right">
-          {row.qema}
+          {row.isAlone && <input className="" placeholder="برجاء ادخال قيمة" />}
         </TableCell>
-        <TableCell className="tableCellTxt col-2" align="right">
-          {row.hala}
-        </TableCell>
+
+          <TableCell className="tableCellTxt col-2" align="right">
+            {row.isAlone && row.hala}
+          </TableCell>
       </TableRow>
       {open &&
         dataServices
@@ -190,13 +201,21 @@ function Row(props) {
           .map((subService) => (
             <TableRow>
               <TableCell className="col-2" align="right">
-                <input type="checkbox" className="form-controle"/> {subService.name}
+                <input type="checkbox" className="form-controle" />{" "}
+                {subService.name}
               </TableCell>
               <TableCell className="col-2" align="right">
-                {subService.omola}
+                <Select
+                  isSearchable={false}
+                  options={[
+                    { value: "نسبة", label: "نسبة" },
+                    { value: "قيمة", label: "قيمة" },
+                  ]}
+                  placeholder="اختر عمولة"
+                />
               </TableCell>
               <TableCell className="col-2" align="right">
-                {subService.qema}
+                <input className="form-control" type='number' placeholder="برجاء ادخال قيمة" />
               </TableCell>
               <TableCell className="col-2" align="right">
                 {subService.hala}
@@ -281,10 +300,9 @@ const Edafat = () => {
           <span className="pt-4 px-4 headLineRoute">{"إضافة الخدمات"}</span>
           <Divider style={{ color: "#F7FAFC" }} />
           <div className="d-flex justify-content-center py-4">
-            <FormControl sx={{ width: 250, height: 40 }}>
+            <FormControl sx={{ width: 450, height: 40 }}>
               <Select
                 isMulti
-                name="colors"
                 options={servicesOptions}
                 className="basic-multi-select"
                 classNamePrefix="select"
