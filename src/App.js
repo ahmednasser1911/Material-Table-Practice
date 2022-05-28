@@ -1,11 +1,12 @@
-import CollapsibleTable from './MaterialTable';
-
+import CollapseTable from './CollapseTable';
+import AddAggregator from './AddAggregator'
 function App() {
   return (
     <div className="App">
       <div className='container m-5'>
 
-      <CollapsibleTable />
+     {/* <CollapseTable /> */}
+     <AddAggregator />
       </div>
     </div>
   );
